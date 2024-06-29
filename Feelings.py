@@ -45,3 +45,32 @@ class Feeling:
 
     def setHeartbeat(self, heartbeat):
         self._heartbeat = heartbeat
+        
+        class Happiness(Feeling):
+    def describe(self):
+        return "Happiness often brings a smile and a sense of joy."
+
+    def physicalResponse(self):
+        self._heartbeat += 10 * self._intensity
+        return self._heartbeat
+
+    def timePasses(self, days):
+        self._intensity -= days * 0.1
+        if self._intensity < 0:
+            self._intensity = 0
+
+    def response(self, event):
+        if event == "win a prize":
+            self._intensity += 2
+        elif event == "receive bad news":
+            self._intensity -= 2
+            if self._intensity < 0:
+                self._intensity = 0
+
+    def influenceByEnv(self, environment):
+        if environment == "party":
+            self._intensity += 1
+        elif environment == "funeral":
+            self._intensity -= 3
+            if self._intensity < 0:
+                self._intensity = 0
