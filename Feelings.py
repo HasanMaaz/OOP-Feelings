@@ -80,3 +80,32 @@ class Feeling:
             self._intensity -= 3
             if self._intensity < 0:
                 self._intensity = 0
+                
+class Anger(Feeling):
+    def describe(self):
+        return "Anger is characterized by frustration and often leads to a raised voice."
+
+    def physicalResponse(self):
+        self._heartbeat += 20 * self._intensity
+        return self._heartbeat
+
+    def timePasses(self, days):
+        self._intensity -= days * 0.3
+        if self._intensity < 0:
+            self._intensity = 0
+
+    def response(self, event):
+        if event == "face injustice":
+            self._intensity += 3
+        elif event == "meditate":
+            self._intensity -= 2
+            if self._intensity < 0:
+                self._intensity = 0
+
+    def influenceByEnv(self, environment):
+        if environment == "hostile":
+            self._intensity += 2
+        elif environment == "calm":
+            self._intensity -= 1
+            if self._intensity < 0:
+                self._intensity = 0
