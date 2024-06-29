@@ -5,7 +5,6 @@ class Feeling:
         self._negativeMeter = negativeMeter
         self._heartbeat = 70  # default resting heartbeat
 
-    #initial methods
     def describe(self):
         pass
     
@@ -21,7 +20,6 @@ class Feeling:
     def influenceByEnv(self, environment):
         pass
 
-#getters and setters
     def getSituation(self):
         return self._situation
     
