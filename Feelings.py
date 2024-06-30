@@ -80,7 +80,7 @@ class Feeling:
             self._intensity -= 3
             if self._intensity < 0:
                 self._intensity = 0
-                
+
 class Anger(Feeling):
     def describe(self):
         return "Anger is characterized by frustration and often leads to a raised voice."
@@ -104,6 +104,64 @@ class Anger(Feeling):
 
     def influenceByEnv(self, environment):
         if environment == "hostile":
+            self._intensity += 2
+        elif environment == "calm":
+            self._intensity -= 1
+            if self._intensity < 0:
+                self._intensity = 0
+
+                class Sadness(Feeling):
+    def describe(self):
+        return "Sadness can lead to tears and a feeling of loss."
+
+    def physicalResponse(self):
+        self._heartbeat -= 5 * self._intensity
+        return self._heartbeat
+
+    def timePasses(self, days):
+        self._intensity -= days * 0.2
+        if self._intensity < 0:
+            self._intensity = 0
+
+    def response(self, event):
+        if event == "lose a loved one":
+            self._intensity += 3
+        elif event == "watch a comedy":
+            self._intensity -= 2
+            if self._intensity < 0:
+                self._intensity = 0
+
+    def influenceByEnv(self, environment):
+        if environment == "rainy day":
+            self._intensity += 1
+        elif environment == "sunny day":
+            self._intensity -= 1
+            if self._intensity < 0:
+                self._intensity = 0
+
+                class Fear(Feeling):
+    def describe(self):
+        return "Fear makes the heart race and creates a sense of dread."
+
+    def physicalResponse(self):
+        self._heartbeat += 30 * self._intensity
+        return self._heartbeat
+
+    def timePasses(self, days):
+        self._intensity -= days * 0.2
+        if self._intensity < 0:
+            self._intensity = 0
+
+    def response(self, event):
+        if event == "confront danger":
+            self._intensity += 3
+        elif event == "relax":
+            self._intensity -= 2
+            if self._intensity < 0:
+                self._intensity = 0
+
+    def influenceByEnv(self, environment):
+        if environment == "threatening":
             self._intensity += 2
         elif environment == "calm":
             self._intensity -= 1
