@@ -167,3 +167,57 @@ class Anger(Feeling):
             self._intensity -= 1
             if self._intensity < 0:
                 self._intensity = 0
+                
+                class TestFeelings(unittest.TestCase):
+
+    def setUp(self):
+        # Initialize instances for testing
+        self.happiness = Happiness("Celebrating", intensity=3, negativeMeter=80)
+        self.anger = Anger("Facing unfair treatment", intensity=2, negativeMeter=90)
+        self.sadness = Sadness("Loss of a friend", intensity=4, negativeMeter=85)
+        self.fear = Fear("Encountering a threat", intensity=1, negativeMeter=95)
+
+    def testDescribe(self):
+        self.assertEqual(self.happiness.describe(), "Happiness often brings a smile and a sense of joy.")
+        self.assertEqual(self.anger.describe(), "Anger is characterized by frustration and often leads to a raised voice.")
+        self.assertEqual(self.sadness.describe(), "Sadness can lead to tears and a feeling of loss.")
+        self.assertEqual(self.fear.describe(), "Fear makes the heart race and creates a sense of dread.")
+
+    def testPhysicalResponse(self):
+        self.assertEqual(self.happiness.physicalResponse(), 100)
+        self.assertEqual(self.anger.physicalResponse(), 110)
+        self.assertEqual(self.sadness.physicalResponse(), 55)
+        self.assertEqual(self.fear.physicalResponse(), 100)
+
+    def testTimePasses(self):
+        self.happiness.timePasses(5)
+        self.assertEqual(self.happiness.getIntensity(), 2.5)
+        self.anger.timePasses(3)
+        self.assertEqual(self.anger.getIntensity(), 0)
+        self.sadness.timePasses(2)
+        self.assertEqual(self.sadness.getIntensity(), 3.6)
+        self.fear.timePasses(4)
+        self.assertEqual(self.fear.getIntensity(), 0.2)
+
+    def testResponse(self):
+        self.happiness.response("win a prize")
+        self.assertEqual(self.happiness.getIntensity(), 5)
+        self.anger.response("meditate")
+        self.assertEqual(self.anger.getIntensity(), 0)
+        self.sadness.response("lose a loved one")
+        self.assertEqual(self.sadness.getIntensity(), 7)
+        self.fear.response("confront danger")
+        self.assertEqual(self.fear.getIntensity(), 4)
+
+    def testInfluenceByEnv(self):
+        self.happiness.influenceByEnv("party")
+        self.assertEqual(self.happiness.getIntensity(), 4)
+        self.anger.influenceByEnv("calm")
+        self.assertEqual(self.anger.getIntensity(), 1)
+        self.sadness.influenceByEnv("rainy day")
+        self.assertEqual(self.sadness.getIntensity(), 5)
+        self.fear.influenceByEnv("threatening")
+        self.assertEqual(self.fear.getIntensity(), 3)
+
+if _name_ == '_main_':
+    unittest.main()
